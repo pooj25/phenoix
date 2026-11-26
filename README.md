@@ -1,5 +1,7 @@
 # Phenoix Design - Full Stack Website
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/pooj25/phenoix)
+
 A modern, responsive full-stack web application for **Phenoix Design** (Solar Panel & Building Architecture Design).
 
 ## Features
