@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phenoix Design - Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #192a30;
+      --navy: #203941;
+      --orange: #ee6b43;
+      --teal: #3c7f7a;
+      --green: #2e7d32;
+      --bg: #f4f7f6;
+      --card: #ffffff;
+      --border: #e1e7e5;
+      --text: #2c3e50;
+      --text-muted: #64748b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Auth Modal */
+    #authOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .auth-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 35px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+    .auth-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .auth-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .auth-card h2 { font-size: 22px; color: var(--navy); margin-bottom: 8px; }
+    .auth-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+    .auth-input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 16px;
+      margin-bottom: 16px;
+      text-align: center;
+      font-family: inherit;
+    }
+    .auth-input:focus { outline: none; border-color: var(--orange); }
+    .btn-submit {
+      width: 100%;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      padding: 13px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+    .btn-submit:hover { background: #d95730; }
+
+    /* Header */
+    header {
+      background: var(--navy);
+      color: #fff;
+      padding: 16px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-wrap img { width: 40px; height: 40px; border-radius: 50%; }
+    .brand-wrap h1 { font-size: 19px; font-weight: 700; letter-spacing: 0.5px; }
+    .brand-wrap span { color: var(--orange); font-size: 13px; background: rgba(238,107,67,0.15); padding: 3px 8px; border-radius: 6px; }
+    .header-actions { display: flex; align-items: center; gap: 15px; }
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background .2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.22); }
+    .btn-logout { background: #d94e3d; }
+    .btn-logout:hover { background: #b83222; }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      padding: 30px 5%;
+      max-width: 1380px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Stats Grid */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .stat-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    .stat-blue { background: #e0f2fe; color: #0284c7; }
+    .stat-orange { background: #ffedd5; color: #ea580c; }
+    .stat-green { background: #dcfce7; color: #16a34a; }
+    .stat-teal { background: #ccfbf1; color: #0d9488; }
+    .stat-info p { font-size: 13px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-info h3 { font-size: 28px; font-weight: 700; color: var(--navy); margin-top: 4px; }
+
+    /* Tabs */
+    .tabs-bar {
+      display: flex;
+      gap: 10px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 25px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 12px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+      transition: color .2s;
+    }
+    .tab-btn.active {
+      color: var(--orange);
+    }
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--orange);
+      border-radius: 3px;
+    }
+
+    /* Content Cards */
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .content-card {
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      padding: 24px;
+    }
+
+    .card-header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .filter-group { display: flex; gap: 10px; align-items: center; }
+    .search-input, .select-input {
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    /* Table */
+    .table-responsive {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background: #f8fafc;
+      padding: 12px 16px;
+      color: var(--text-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+    }
+    tr:hover td { background: #fafbfc; }
+
+    /* Status Badges */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .badge-New { background: #ffedd5; color: #c2410c; }
+    .badge-Contacted { background: #e0f2fe; color: #0369a1; }
+    .badge-InProgress { background: #fef08a; color: #854d0e; }
+    .badge-Closed { background: #dcfce7; color: #15803d; }
+
+    .action-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-right: 6px;
+    }
+    .action-btn:hover { background: #f8fafc; border-color: #cbd5e1; }
+    .action-delete { color: #dc2626; }
+    .action-delete:hover { background: #fee2e2; border-color: #fca5a5; }
+
+    /* Form Styles */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: var(--navy); }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary:hover { background: #d95730; }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      padding: 14px 22px;
+      background: var(--navy);
+      color: #fff;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 2000;
+    }
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Auth Modal -->
+  <div id="authOverlay">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <img src="logo.jpg" alt="Phenoix Logo">
+      </div>
+      <h2>Phenoix Admin Access</h2>
+      <p>Enter your Admin PIN / Password to manage customer leads, projects & settings.</p>
+      <input type="password" id="adminPinInput" class="auth-input" placeholder="Enter PIN (Default: admin123)" autofocus>
+      <button class="btn-submit" onclick="loginAdmin()">Unlock Dashboard ➔</button>
+      <small style="display:block; margin-top:12px; color:var(--text-muted); font-size:12px;">Default PIN: <b>admin123</b></small>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-wrap">
+      <img src="logo.jpg" alt="Phenoix Logo">
+      <h1>PHENOIX DESIGN</h1>
+      <span>ADMIN PORTAL</span>
+    </div>
+    <div class="header-actions">
+      <a href="/" target="_blank" class="btn-secondary">🌐 View Live Website</a>
+      <button onclick="logoutAdmin()" class="btn-secondary btn-logout">Logout</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Stats Overview -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon stat-blue">📥</div>
+        <div class="stat-info">
+          <p>Total Leads</p>
+          <h3 id="statTotal">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon stat-orange">🔥</div>
+        <div class="stat-info">
+          <p>New Enquiries</p>
+          <h3 id="statNew">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon stat-teal">⚡</div>
+        <div class="stat-info">
+          <p>In Progress</p>
+          <h3 id="statProgress">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon stat-green">📂</div>
+        <div class="stat-info">
+          <p>Active Projects</p>
+          <h3 id="statProjects">0</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div class="tabs-bar">
+      <button class="tab-btn active" onclick="switchTab('enquiries')">📋 Customer Enquiries & Leads</button>
+      <button class="tab-btn" onclick="switchTab('projects')">🎨 Manage Projects</button>
+      <button class="tab-btn" onclick="switchTab('settings')">⚙️ Site Settings</button>
+    </div>
+
+    <!-- TAB 1: Enquiries Panel -->
+    <div id="tab-enquiries" class="panel active">
+      <div class="content-card">
+        <div class="card-header-flex">
+          <h2 style="font-size: 18px; color: var(--navy);">Client Inquiries & Quote Requests</h2>
+          <div class="filter-group">
+            <select id="statusFilter" class="select-input" onchange="fetchEnquiries()">
+              <option value="All">All Statuses</option>
+              <option value="New">New</option>
+              <option value="Contacted">Contacted</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Closed">Closed</option>
+            </select>
+            <button onclick="exportCSV()" class="btn-secondary" style="background:var(--navy);">📥 Export CSV</button>
+            <button onclick="fetchEnquiries()" class="btn-secondary" style="background:#64748b;">🔄 Refresh</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Client Name</th>
+                <th>Email</th>
+                <th>Project Type</th>
+                <th>Message / Budget</th>
+                <th>Source</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="enquiriesTableBody">
+              <tr><td colspan="9" style="text-align:center; padding:30px;">Loading enquiries...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Projects Panel -->
+    <div id="tab-projects" class="panel">
+      <div class="content-card" style="margin-bottom: 25px;">
+        <h2 style="font-size: 18px; color: var(--navy); margin-bottom: 15px;">➕ Add New Portfolio Project</h2>
+        <form id="projectForm" onsubmit="addProject(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Project Title *</label>
+              <input type="text" id="pTitle" placeholder="e.g. Skyline Solar Tower" required>
+            </div>
+            <div class="form-group">
+              <label>Category *</label>
+              <select id="pCategory" required>
+                <option value="Solar Panel Design">Solar Panel Design</option>
+                <option value="Building Design">Building Design</option>
+                <option value="3D & Planning">3D & Planning</option>
+                <option value="Commercial Architecture">Commercial Architecture</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Badge / Tag</label>
+              <input type="text" id="pBadge" placeholder="e.g. Residential, 10kW Rooftop, Commercial">
+            </div>
+            <div class="form-group">
+              <label>Color Theme</label>
+              <select id="pGradient">
+                <option value="p-a">Theme A (Solar Green & Coral)</option>
+                <option value="p-b">Theme B (Teal & Gold)</option>
+                <option value="p-c">Theme C (Sunset Orange & Forest)</option>
+              </select>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label>Description *</label>
+              <textarea id="pDesc" rows="2" placeholder="Brief project details, capacity, and design highlights..." required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary" style="margin-top: 15px;">Add Project to Website ↗</button>
+        </form>
+      </div>
+
+      <div class="content-card">
+        <h2 style="font-size: 18px; color: var(--navy); margin-bottom: 15px;">Current Website Projects</h2>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Badge</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="projectsTableBody">
+              <tr><td colspan="6" style="text-align:center; padding:20px;">Loading projects...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Settings Panel -->
+    <div id="tab-settings" class="panel">
+      <div class="content-card" style="max-width: 650px;">
+        <h2 style="font-size: 18px; color: var(--navy); margin-bottom: 20px;">Company & Security Settings</h2>
+        <form onsubmit="saveSettings(event)">
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label>Official Contact Email</label>
+            <input type="email" id="setContactEmail" value="phenoixdesign54@gmail.com" required>
+            <small style="color:var(--text-muted); font-size:12px;">This email is displayed across the hero, contact section, and footer.</small>
+          </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label>Website Tagline / Mission</label>
+            <input type="text" id="setTagline" value="Designing spaces for a brighter tomorrow.">
+          </div>
+          <div class="form-group" style="margin-bottom: 22px;">
+            <label>Change Admin Password / PIN</label>
+            <input type="password" id="setNewPin" placeholder="Leave blank to keep current PIN">
+          </div>
+          <button type="submit" class="btn-primary">Save Settings 💾</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast">Changes saved successfully!</div>
+
+  <script>
+    let adminToken = localStorage.getItem('phenoix_admin_token') || '';
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (adminToken) {
+        verifyToken();
+      }
+    });
+
+    async function loginAdmin() {
+      const pin = document.getElementById('adminPinInput').value.trim();
+      if (!pin) return alert('Please enter the Admin PIN');
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pin })
+        });
+        const data = await res.json();
+        if (data.success) {
+          adminToken = data.token;
+          localStorage.setItem('phenoix_admin_token', adminToken);
+          document.getElementById('authOverlay').style.display = 'none';
+          showToast('Welcome back to Phenoix Admin!');
+          loadDashboard();
+        } else {
+          alert(data.message || 'Incorrect PIN');
+        }
+      } catch (err) {
+        alert('Could not connect to server.');
+      }
+    }
+
+    async function verifyToken() {
+      try {
+        const res = await fetch('/api/admin/stats', {
+          headers: { 'x-admin-token': adminToken }
+        });
+        if (res.ok) {
+          document.getElementById('authOverlay').style.display = 'none';
+          loadDashboard();
+        } else {
+          localStorage.removeItem('phenoix_admin_token');
+          document.getElementById('authOverlay').style.display = 'flex';
+        }
+      } catch (err) {
+        document.getElementById('authOverlay').style.display = 'flex';
+      }
+    }
+
+    function logoutAdmin() {
+      localStorage.removeItem('phenoix_admin_token');
+      adminToken = '';
+      location.reload();
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
+
+      if (tabId === 'enquiries') fetchEnquiries();
+      if (tabId === 'projects') fetchProjects();
+    }
+
+    async function loadDashboard() {
+      fetchStats();
+      fetchEnquiries();
+      fetchProjects();
+    }
+
+    async function fetchStats() {
+      try {
+        const res = await fetch('/api/admin/stats', {
+          headers: { 'x-admin-token': adminToken }
+        });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('statTotal').textContent = data.stats.totalEnquiries;
+          document.getElementById('statNew').textContent = data.stats.newEnquiries;
+          document.getElementById('statProgress').textContent = data.stats.inProgress;
+          document.getElementById('statProjects').textContent = data.stats.totalProjects;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    let allEnquiries = [];
+    async function fetchEnquiries() {
+      const status = document.getElementById('statusFilter').value;
+      try {
+        const res = await fetch(`/api/admin/enquiries?status=${encodeURIComponent(status)}`, {
+          headers: { 'x-admin-token': adminToken }
+        });
+        const data = await res.json();
+        const tbody = document.getElementById('enquiriesTableBody');
+        tbody.innerHTML = '';
+        allEnquiries = data.enquiries || [];
+
+        if (allEnquiries.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:30px; color:var(--text-muted);">No enquiries found.</td></tr>';
+          return;
+        }
+
+        allEnquiries.forEach(e => {
+          const dateStr = new Date(e.created_at).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>#${e.id}</td>
+            <td><strong>${escapeHtml(e.name)}</strong></td>
+            <td><a href="mailto:${escapeHtml(e.email)}" style="color:var(--teal); font-weight:600;">${escapeHtml(e.email)}</a></td>
+            <td><span class="badge" style="background:#f1f5f9; color:#334155;">${escapeHtml(e.project_type)}</span></td>
+            <td style="max-width:250px;"><div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${escapeHtml(e.message)}">${escapeHtml(e.message || '—')}</div></td>
+            <td><small style="color:var(--text-muted);">${escapeHtml(e.source || 'Website')}</small></td>
+            <td><small>${dateStr}</small></td>
+            <td>
+              <select onchange="updateStatus(${e.id}, this.value)" class="select-input" style="padding:4px 8px; font-size:12px; font-weight:600;">
+                <option value="New" ${e.status === 'New' ? 'selected' : ''}>New</option>
+                <option value="Contacted" ${e.status === 'Contacted' ? 'selected' : ''}>Contacted</option>
+                <option value="In Progress" ${e.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                <option value="Closed" ${e.status === 'Closed' ? 'selected' : ''}>Closed</option>
+              </select>
+            </td>
+            <td>
+              <a href="mailto:${escapeHtml(e.email)}?subject=Phenoix%20Design%20-%20Regarding%20Your%20Enquiry&body=Hi%20${encodeURIComponent(e.name)},%0D%0A%0D%0AThank%20you%20for%20contacting%20Phenoix%20Design%20regarding%20${encodeURIComponent(e.project_type)}." class="action-btn">✉️ Reply</a>
+              <button onclick="deleteEnquiry(${e.id})" class="action-btn action-delete">🗑️</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function updateStatus(id, newStatus) {
+      try {
+        const res = await fetch(`/api/admin/enquiries/${id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-token': adminToken
+          },
+          body: JSON.stringify({ status: newStatus })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(`Status updated to ${newStatus}`);
+          fetchStats();
+        }
+      } catch (err) {
+        alert('Failed to update status.');
+      }
+    }
+
+    async function deleteEnquiry(id) {
+      if (!confirm('Are you sure you want to delete this enquiry?')) return;
+      try {
+        const res = await fetch(`/api/admin/enquiries/${id}`, {
+          method: 'DELETE',
+          headers: { 'x-admin-token': adminToken }
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Enquiry deleted');
+          fetchEnquiries();
+          fetchStats();
+        }
+      } catch (err) {
+        alert('Delete failed');
+      }
+    }
+
+    function exportCSV() {
+      if (!allEnquiries.length) return alert('No enquiries to export.');
+      let csv = 'ID,Name,Email,Project Type,Message,Source,Status,Created At\n';
+      allEnquiries.forEach(e => {
+        csv += `"${e.id}","${e.name}","${e.email}","${e.project_type}","${(e.message||'').replace(/"/g, '""')}","${e.source}","${e.status}","${e.created_at}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `phenoix_enquiries_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+    }
+
+    async function fetchProjects() {
+      try {
+        const res = await fetch('/api/projects');
+        const data = await res.json();
+        const tbody = document.getElementById('projectsTableBody');
+        tbody.innerHTML = '';
+        if (!data.projects || !data.projects.length) {
+          tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:20px;">No projects yet.</td></tr>';
+          return;
+        }
+        data.projects.forEach(p => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>#${p.id}</td>
+            <td><strong>${escapeHtml(p.title)}</strong></td>
+            <td>${escapeHtml(p.category)}</td>
+            <td><span class="badge" style="background:#eef2f6; color:#1e293b;">${escapeHtml(p.badge)}</span></td>
+            <td style="max-width:300px;"><div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(p.description)}</div></td>
+            <td>
+              <button onclick="deleteProject(${p.id})" class="action-btn action-delete">Delete 🗑️</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function addProject(e) {
+      e.preventDefault();
+      const title = document.getElementById('pTitle').value.trim();
+      const category = document.getElementById('pCategory').value;
+      const badge = document.getElementById('pBadge').value.trim();
+      const gradient = document.getElementById('pGradient').value;
+      const description = document.getElementById('pDesc').value.trim();
+
+      try {
+        const res = await fetch('/api/admin/projects', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-token': adminToken
+          },
+          body: JSON.stringify({ title, category, badge, gradient, description })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Project added successfully!');
+          document.getElementById('projectForm').reset();
+          fetchProjects();
+          fetchStats();
+        } else {
+          alert(data.message);
+        }
+      } catch (err) {
+        alert('Could not add project.');
+      }
+    }
+
+    async function deleteProject(id) {
+      if (!confirm('Are you sure you want to delete this project from the website?')) return;
+      try {
+        const res = await fetch(`/api/admin/projects/${id}`, {
+          method: 'DELETE',
+          headers: { 'x-admin-token': adminToken }
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Project removed');
+          fetchProjects();
+          fetchStats();
+        }
+      } catch (err) {
+        alert('Could not delete project.');
+      }
+    }
+
+    async function saveSettings(e) {
+      e.preventDefault();
+      const contact_email = document.getElementById('setContactEmail').value.trim();
+      const tagline = document.getElementById('setTagline').value.trim();
+      const new_pin = document.getElementById('setNewPin').value.trim();
+
+      try {
+        const res = await fetch('/api/admin/settings', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-token': adminToken
+          },
+          body: JSON.stringify({ contact_email, tagline, new_pin })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Settings saved successfully!');
+          if (new_pin) {
+            adminToken = new_pin;
+            localStorage.setItem('phenoix_admin_token', adminToken);
+            document.getElementById('setNewPin').value = '';
+          }
+        }
+      } catch (err) {
+        alert('Failed to save settings.');
+      }
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>
