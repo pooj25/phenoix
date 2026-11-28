@@ -1,19 +1,23 @@
 :root {
-  --navy: #182c33;
-  --dark-teal: #203941;
-  --orange: #ee6b43;
-  --light-orange: #fff1eb;
-  --teal: #3c7f7a;
-  --gold: #f5c85b;
-  --bg: #f8faf9;
+  --black: #09090b;
+  --black-soft: #18181b;
+  --charcoal: #27272a;
+  --gold: #b38828;
+  --gold-light: #dfba73;
+  --gold-bright: #c5a059;
+  --gold-bg: #faf6ee;
+  --gold-border: #e9dbbd;
+  --gold-gradient: linear-gradient(135deg, #c29b38 0%, #e2c17f 50%, #b38828 100%);
+  --bg: #f8f7f4;
   --paper: #ffffff;
-  --border: #e3ece8;
-  --border-dark: #cbdcd5;
-  --text-main: #1e293b;
-  --text-muted: #52666d;
-  --shadow-sm: 0 4px 14px rgba(24, 44, 51, 0.05);
-  --shadow-md: 0 12px 30px rgba(24, 44, 51, 0.08);
-  --shadow-lg: 0 24px 50px rgba(24, 44, 51, 0.12);
+  --border: #e4e2da;
+  --border-subtle: #f0eee8;
+  --text-main: #18181b;
+  --text-muted: #52525b;
+  --text-light: #71717a;
+  --shadow-sm: 0 4px 18px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 14px 35px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.09);
 }
 
 * {
@@ -34,58 +38,71 @@ body {
   min-height: 100vh;
 }
 
-/* Page Container (Full page sections) */
+/* Page Container */
 .page-container {
-  max-width: 1000px;
+  max-width: 1020px;
   margin: 0 auto;
-  padding: 40px 24px 70px;
+  padding: 45px 24px 75px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 /* =========================================
-   PAGE HEADER (Website Name & Top-Right Box)
+   PAGE HEADER (Luxury Minimalist)
 ========================================= */
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 28px;
+  padding: 22px 32px;
   background: var(--paper);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 20px;
   box-shadow: var(--shadow-sm);
-  margin-bottom: 30px;
+  margin-bottom: 32px;
   gap: 20px;
+  position: relative;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 32px;
+  right: 32px;
+  height: 2px;
+  background: var(--gold-gradient);
+  border-radius: 2px;
+  opacity: 0.85;
 }
 
 .header-brand h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 28px;
+  font-size: 27px;
   font-weight: 800;
-  color: var(--navy);
-  letter-spacing: 1px;
+  color: var(--black);
+  letter-spacing: 1.5px;
 }
 
 .brand-tagline {
-  font-size: 13px;
-  color: var(--teal);
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 /* Top-Right: Logo, Company & Contact Info */
 .header-company-box {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 8px 16px;
-  background: #f0f7f5;
-  border: 1px solid #d7ebe4;
-  border-radius: 14px;
+  gap: 15px;
+  padding: 9px 18px;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-border);
+  border-radius: 16px;
 }
 
 .company-logo {
@@ -93,33 +110,36 @@ body {
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--orange);
+  border: 2px solid var(--gold-bright);
   background: #fff;
+  box-shadow: 0 2px 8px rgba(179, 136, 40, 0.2);
 }
 
 .company-details {
   display: flex;
   flex-direction: column;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .company-name {
   font-size: 15px;
-  font-weight: 700;
-  color: var(--navy);
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: 0.3px;
 }
 
 .contact-label {
-  font-size: 11px;
-  color: var(--text-muted);
+  font-size: 10.5px;
+  color: var(--text-light);
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   margin-top: 2px;
 }
 
 .company-contact {
-  font-size: 13px;
-  color: var(--orange);
+  font-size: 13.5px;
+  color: var(--gold);
   font-weight: 700;
   text-decoration: none;
   transition: color 0.2s;
@@ -128,17 +148,17 @@ body {
 
 .company-contact:hover {
   text-decoration: underline;
-  color: #d15128;
+  color: #8c671b;
 }
 
 /* =========================================
-   MAIN CARD (Notebook / Page Layout Style)
+   MAIN CARD (Architectural Paper Style)
 ========================================= */
 .main-card {
   background: var(--paper);
   border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 45px 50px;
+  border-radius: 26px;
+  padding: 48px 52px;
   box-shadow: var(--shadow-md);
   flex: 1;
   position: relative;
@@ -149,20 +169,19 @@ body {
 ========================================= */
 .editorial-intro {
   margin-bottom: 35px;
-  padding: 24px 28px;
-  background: #fbfdfc;
-  border-left: 4px solid var(--orange);
-  border-radius: 14px;
+  padding: 26px 32px;
+  background: #fafaf8;
   border: 1px solid var(--border);
-  border-left: 4px solid var(--orange);
+  border-left: 4px solid var(--gold-bright);
+  border-radius: 16px;
 }
 
 .lead-quote {
   font-family: 'Playfair Display', serif;
-  font-size: 21px;
+  font-size: 21.5px;
   font-weight: 700;
   line-height: 1.45;
-  color: var(--navy);
+  color: var(--black);
   margin-bottom: 12px;
   letter-spacing: 0.2px;
 }
@@ -174,38 +193,38 @@ body {
 }
 
 .lead-sub b {
-  color: var(--navy);
+  color: var(--black);
 }
 
 /* Bento Grid */
 .bento-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 22px;
+  gap: 24px;
   margin-bottom: 35px;
 }
 
 .bento-card {
   background: #ffffff;
   border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 26px 24px;
+  border-radius: 20px;
+  padding: 28px 26px;
   display: flex;
   flex-direction: column;
   transition: all 0.25s ease;
   position: relative;
-  box-shadow: 0 4px 15px rgba(24, 44, 51, 0.03);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
 }
 
 .bento-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--teal);
+  transform: translateY(-4px);
+  border-color: var(--gold-bright);
   box-shadow: var(--shadow-md);
 }
 
 .b-highlight {
-  background: #fafdfc;
-  border-color: #d4e8e1;
+  background: #fbfbf9;
+  border-color: #dedbd2;
 }
 
 .bento-icon {
@@ -216,29 +235,29 @@ body {
 
 .bento-tag {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--orange);
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--gold);
   letter-spacing: 1.2px;
   text-transform: uppercase;
   display: inline-block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .bento-card h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 18.5px;
+  font-size: 19px;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--black);
   margin-bottom: 10px;
   line-height: 1.35;
 }
 
 .bento-card p {
-  font-size: 13.8px;
+  font-size: 14px;
   color: var(--text-main);
   line-height: 1.6;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   flex: 1;
 }
 
@@ -252,11 +271,11 @@ body {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   font-weight: 600;
-  color: var(--teal);
-  background: #edf7f4;
+  color: var(--gold);
+  background: var(--gold-bg);
   padding: 4px 10px;
   border-radius: 6px;
-  border: 1px solid #d4ece5;
+  border: 1px solid var(--gold-border);
 }
 
 /* Metrics Strip */
@@ -265,11 +284,11 @@ body {
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
   padding: 24px 20px;
-  background: #f0f7f5;
-  border: 1px solid #d6ece5;
-  border-radius: 16px;
+  background: #f5f4ef;
+  border: 1px solid var(--border);
+  border-radius: 18px;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 .metric-col {
@@ -279,30 +298,19 @@ body {
 
 .metric-col strong {
   font-family: 'Playfair Display', serif;
-  font-size: 22px;
+  font-size: 23px;
   font-weight: 800;
-  color: var(--navy);
+  color: var(--black);
   letter-spacing: 0.5px;
 }
 
 .metric-col span {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--teal);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   margin-top: 3px;
-}
-
-@media (max-width: 768px) {
-  .bento-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .metrics-strip {
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
 }
 
 /* Action Area: Down Arrow & Start Button */
@@ -311,13 +319,13 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
   margin: 35px 0 25px;
 }
 
 .down-arrow-indicator span {
   font-size: 28px;
-  color: var(--orange);
+  color: var(--gold);
   font-weight: 900;
   display: inline-block;
   animation: bounceArrow 1.5s infinite;
@@ -329,24 +337,49 @@ body {
 }
 
 .btn-start {
-  background: var(--orange);
+  background: var(--black);
   color: #fff;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 800;
   font-family: 'DM Sans', sans-serif;
-  padding: 16px 48px;
+  padding: 16px 52px;
   border-radius: 35px;
-  border: none;
+  border: 1px solid var(--gold-bright);
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(238, 107, 67, 0.35);
-  letter-spacing: 0.5px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.8px;
   transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-start::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gold-gradient);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 0;
+}
+
+.btn-start span, .btn-start {
+  position: relative;
+  z-index: 1;
 }
 
 .btn-start:hover {
-  background: #d95730;
+  color: var(--black);
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(238, 107, 67, 0.45);
+  box-shadow: 0 14px 32px rgba(194, 155, 56, 0.35);
+  border-color: var(--gold);
+}
+
+.btn-start:hover::before {
+  opacity: 1;
 }
 
 /* Sketch Divider: — x — */
@@ -355,17 +388,17 @@ body {
   font-family: 'JetBrains Mono', monospace;
   font-size: 20px;
   font-weight: 700;
-  color: var(--text-muted);
+  color: var(--gold);
   letter-spacing: 6px;
   margin-top: 30px;
-  opacity: 0.6;
+  opacity: 0.75;
 }
 
 /* =========================================
    PAGE 2: DRAWINGS SELECTION & APPLY
 ========================================= */
 .header-page2 {
-  background: #fbfdfc;
+  background: var(--paper);
 }
 
 .header-right-actions {
@@ -378,26 +411,33 @@ body {
   text-decoration: none;
   font-size: 13px;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--black);
   padding: 8px 16px;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: #fff;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 .btn-back:hover {
-  background: #f1f5f9;
+  background: var(--gold-bg);
+  border-color: var(--gold-border);
 }
 
 .admin-link {
   text-decoration: none;
   font-size: 13px;
   font-weight: 700;
-  color: #fff;
-  background: var(--dark-teal);
+  color: var(--gold-bg);
+  background: var(--black);
+  border: 1px solid var(--gold);
   padding: 8px 16px;
   border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.admin-link:hover {
+  background: #27272a;
 }
 
 /* Drawings Grid */
@@ -409,10 +449,10 @@ body {
 }
 
 .drawing-card {
-  background: #fff;
-  border: 2px solid var(--border);
-  border-radius: 20px;
-  padding: 30px;
+  background: #ffffff;
+  border: 1.5px solid var(--border);
+  border-radius: 22px;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -421,7 +461,7 @@ body {
 }
 
 .drawing-card:hover {
-  border-color: var(--orange);
+  border-color: var(--gold-bright);
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
@@ -430,8 +470,9 @@ body {
   position: absolute;
   top: 18px;
   right: 20px;
-  background: var(--navy);
-  color: #fff;
+  background: var(--black);
+  color: var(--gold-light);
+  border: 1px solid var(--gold);
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   font-weight: 800;
@@ -444,34 +485,27 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .drawing-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
-}
-
-.type-solar .drawing-icon {
-  background: #fef3c7;
-  color: #d97706;
-}
-
-.type-building .drawing-icon {
-  background: #e0f2fe;
-  color: #0284c7;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-border);
+  color: var(--gold);
 }
 
 .drawing-header h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 20px;
+  font-size: 20.5px;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--black);
   line-height: 1.25;
 }
 
@@ -483,13 +517,13 @@ body {
 
 /* Blueprint Mini-Sketches */
 .drawing-preview-box {
-  background: #1b2f38;
+  background: #11141a;
   border-radius: 14px;
   padding: 20px;
-  margin-bottom: 20px;
-  color: #9cd1c8;
+  margin-bottom: 22px;
+  color: #dfba73;
   font-family: 'JetBrains Mono', monospace;
-  border: 1px solid #2e4d58;
+  border: 1px solid #272d3b;
 }
 
 .solar-sketch .panel-row {
@@ -499,9 +533,9 @@ body {
 }
 
 .p-cell {
-  background: #254b57;
-  border: 1px solid #4a8292;
-  color: #92e0ce;
+  background: #1c222e;
+  border: 1px solid #dfba73;
+  color: #f7dfa5;
   font-size: 11px;
   padding: 8px 12px;
   border-radius: 4px;
@@ -519,9 +553,9 @@ body {
 }
 
 .room {
-  background: #233e49;
-  border: 1px dashed #4e8394;
-  color: #8edecb;
+  background: #1c222e;
+  border: 1px dashed #dfba73;
+  color: #f7dfa5;
   font-size: 10px;
   display: flex;
   align-items: center;
@@ -536,10 +570,10 @@ body {
 
 .blueprint-meta {
   font-size: 10px;
-  color: #6398a6;
+  color: #949aab;
   text-align: center;
   margin-top: 10px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
 }
 
 /* Features list */
@@ -552,14 +586,14 @@ body {
 .drawing-features li {
   font-size: 13.5px;
   color: var(--text-main);
-  padding: 6px 0;
-  border-bottom: 1px solid #f1f5f9;
+  padding: 7px 0;
+  border-bottom: 1px solid #f1efe9;
 }
 
 /* Apply Buttons */
 .btn-apply {
   width: 100%;
-  padding: 14px;
+  padding: 15px;
   border-radius: 12px;
   font-family: 'DM Sans', sans-serif;
   font-size: 16px;
@@ -567,28 +601,16 @@ body {
   border: none;
   cursor: pointer;
   letter-spacing: 0.5px;
-  transition: all 0.2s ease;
-}
-
-.btn-apply-solar {
-  background: var(--orange);
+  transition: all 0.25s ease;
+  background: var(--black);
   color: #fff;
-  box-shadow: 0 6px 18px rgba(238, 107, 67, 0.25);
+  border: 1px solid var(--gold-bright);
 }
 
-.btn-apply-solar:hover {
-  background: #d95730;
-  transform: translateY(-2px);
-}
-
-.btn-apply-building {
-  background: var(--navy);
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(24, 44, 51, 0.25);
-}
-
-.btn-apply-building:hover {
-  background: #0f1c21;
+.btn-apply:hover {
+  background: var(--gold-gradient);
+  color: var(--black);
+  box-shadow: 0 8px 24px rgba(194, 155, 56, 0.3);
   transform: translateY(-2px);
 }
 
@@ -599,8 +621,8 @@ body {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(6px);
+  background: rgba(9, 9, 11, 0.75);
+  backdrop-filter: blur(8px);
   z-index: 1000;
   align-items: center;
   justify-content: center;
@@ -612,11 +634,12 @@ body {
 }
 
 .modal-box {
-  background: #fff;
-  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 24px;
   max-width: 500px;
   width: 100%;
-  padding: 35px 40px;
+  padding: 38px 40px;
   box-shadow: var(--shadow-lg);
   position: relative;
   animation: modalIn 0.25s ease-out;
@@ -631,7 +654,7 @@ body {
   position: absolute;
   top: 18px;
   right: 20px;
-  background: #f1f5f9;
+  background: #f4f2ec;
   border: none;
   width: 32px;
   height: 32px;
@@ -643,26 +666,26 @@ body {
 }
 
 .btn-close-modal:hover {
-  background: #e2e8f0;
-  color: var(--navy);
+  background: #e5e2d8;
+  color: var(--black);
 }
 
 .modal-header {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .modal-pre {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
-  font-weight: 700;
-  color: var(--orange);
-  letter-spacing: 1px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 1.2px;
 }
 
 .modal-header h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  color: var(--navy);
+  font-size: 23px;
+  color: var(--black);
   margin: 4px 0 8px;
 }
 
@@ -681,7 +704,7 @@ body {
 .form-group label {
   font-size: 13px;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--black);
 }
 
 .form-group input,
@@ -692,30 +715,34 @@ body {
   font-size: 14px;
   font-family: inherit;
   transition: border-color 0.2s;
+  background: #fafaf8;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--orange);
+  border-color: var(--gold-bright);
+  background: #ffffff;
 }
 
 .btn-modal-submit {
   width: 100%;
-  background: var(--orange);
+  background: var(--black);
   color: #fff;
-  border: none;
-  padding: 14px;
+  border: 1px solid var(--gold-bright);
+  padding: 15px;
   border-radius: 12px;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   margin-top: 10px;
-  transition: background 0.2s;
+  transition: all 0.25s ease;
 }
 
 .btn-modal-submit:hover {
-  background: #d95730;
+  background: var(--gold-gradient);
+  color: var(--black);
+  box-shadow: 0 8px 24px rgba(194, 155, 56, 0.3);
 }
 
 .modal-status {
@@ -729,12 +756,13 @@ body {
    SITE FOOTER
 ========================================= */
 .site-footer {
-  background: var(--navy);
-  color: #cbd5e1;
-  padding: 30px 24px;
+  background: var(--black);
+  color: #a1a1aa;
+  padding: 32px 24px;
   text-align: center;
   font-size: 13px;
   margin-top: auto;
+  border-top: 1px solid #27272a;
 }
 
 .footer-inner {
@@ -746,7 +774,7 @@ body {
 }
 
 .site-footer a {
-  color: var(--gold);
+  color: var(--gold-light);
   text-decoration: none;
 }
 
@@ -765,7 +793,7 @@ body {
   .page-header {
     flex-direction: column;
     align-items: flex-start;
-    padding: 18px 20px;
+    padding: 20px 22px;
   }
 
   .header-company-box {
@@ -773,7 +801,7 @@ body {
   }
 
   .main-card {
-    padding: 28px 20px;
+    padding: 30px 22px;
   }
 
   .drawings-grid {
@@ -788,6 +816,6 @@ body {
   }
 
   .modal-box {
-    padding: 25px 20px;
+    padding: 26px 22px;
   }
 }
