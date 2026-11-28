@@ -3,194 +3,294 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phenoix Design | Solar & Building Design</title>
-  <meta name="description" content="Phenoix Design creates colorful, practical solar and building design solutions.">
+  <title>Phenoix Design | Solar & Building Drawing Portal</title>
+  <meta name="description" content="Phenoix Design - Professional Solar Panel Drawings and Building Architectural Designs.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="#home"><img src="logo.jpg" alt="Phenoix Design logo"><span>PHENOIX</span><b>DESIGN</b></a>
-  <button class="menu" aria-label="Open menu">☰</button>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#calculator">Calculator</a>
-    <a href="#projects">Projects</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
-    <a href="/admin" target="_blank" style="color:#f5c85b; font-weight:700;">Admin 🔐</a>
-  </nav>
-  <a class="nav-cta" href="#contact">Get a Quote ↗</a>
-</header>
 
-<main id="home">
-  <section class="hero">
-    <div class="hero-art">
-      <div class="sun"></div><div class="mountain m1"></div><div class="mountain m2"></div>
-      <div class="hill"></div>
-      <div class="building"><div class="roof"></div><div class="tower"><i></i><i></i><i></i><i></i></div><div class="base"><span></span><span></span><span></span><span></span></div></div>
-      <div class="panel p1"></div><div class="panel p2"></div><div class="panel p3"></div>
-      <div class="tree t1"></div><div class="tree t2"></div>
-    </div>
-    <div class="hero-content">
-      <p class="eyebrow">SOLAR • ARCHITECTURE • ENGINEERING</p>
-      <h1>Designing spaces<br><em>for a brighter</em> tomorrow.</h1>
-      <p class="lead">Creative solar and building design that brings smart planning, clean energy and beautiful spaces together.</p>
-      <div class="hero-actions">
-        <a class="button primary" href="#calculator">Calculate Solar Savings</a>
-        <a class="button light" href="mailto:phenoixdesign54@gmail.com">Email Us ✉️</a>
+  <!-- ==============================================
+       PAGE 1: Instructions & Important Points
+  ============================================== -->
+  <section class="page-container" id="page1">
+    <!-- Top Bar / Header -->
+    <header class="page-header">
+      <div class="header-brand">
+        <h1>PHENOIX DESIGN</h1>
+        <p class="brand-tagline">Solar &amp; Building Architectural Design</p>
       </div>
-      <div class="hero-note"><span>✦</span> Sustainable ideas. Practical designs. Built to last.</div>
-    </div>
-  </section>
 
-  <section class="intro" id="about">
-    <div class="section-title"><p class="eyebrow">WHAT WE DO</p><h2>Ideas that become<br><em>real places.</em></h2></div>
-    <p>At <b>Phenoix Design</b>, we combine solar planning and building design to create projects that are efficient, functional and visually memorable. From the first sketch to the final plan, we keep every detail purposeful.</p>
-    <p class="service-focus"><b>Our focus:</b> Solar panel design &amp; building design.</p>
-    <div class="stats">
-      <div><strong>50+</strong><span>Design concepts</span></div>
-      <div><strong>30+</strong><span>Solar layouts</span></div>
-      <div><strong>100%</strong><span>Design focused</span></div>
-    </div>
-  </section>
-
-  <section class="services" id="services">
-    <div class="center-title"><p class="eyebrow">OUR SERVICES</p><h2>From sunlight to structure.</h2><p>Choose the design service your project needs.</p></div>
-    <div class="cards">
-      <article class="card green"><div class="icon">☀</div><h3>Solar Panel Design</h3><p>Rooftop solar panel layouts, panel planning, energy-focused concepts and clean system presentation.</p><a href="#contact">Explore service →</a></article>
-      <article class="card orange"><div class="icon">⌂</div><h3>Building Design</h3><p>Modern residential and commercial concepts with practical layouts, elevations and space planning.</p><a href="#contact">Explore service →</a></article>
-      <article class="card blue"><div class="icon">✎</div><h3>3D &amp; Planning</h3><p>Clear visual concepts that help you understand the project before construction begins.</p><a href="#contact">Explore service →</a></article>
-    </div>
-  </section>
-
-  <!-- Interactive Solar & Cost Calculator -->
-  <section class="calculator-section" id="calculator">
-    <div class="center-title">
-      <p class="eyebrow">INSTANT ESTIMATE</p>
-      <h2>Solar &amp; Building Cost Calculator</h2>
-      <p>Estimate your required capacity, government subsidy, and annual savings in real-time.</p>
-    </div>
-    <div class="calc-container">
-      <div class="calc-inputs">
-        <div class="calc-group">
-          <label>Monthly Electricity Bill: <b id="billVal" style="color:var(--orange);">₹2,500</b></label>
-          <input type="range" id="monthlyBillInput" min="500" max="30000" step="500" value="2500" oninput="runCalculator()">
-        </div>
-        <div class="calc-group">
-          <label>Rooftop Area Available: <b id="areaVal" style="color:var(--teal);">450 sq ft</b></label>
-          <input type="range" id="roofAreaInput" min="100" max="4000" step="50" value="450" oninput="runCalculator()">
-        </div>
-        <div class="calc-group">
-          <label>Property Category:</label>
-          <select id="propertyTypeSelect" onchange="runCalculator()">
-            <option value="residential">Residential (Eligible for Govt PM-Surya Subsidy)</option>
-            <option value="commercial">Commercial / Industrial Property</option>
-          </select>
+      <!-- Top Right: Logo, Company & Contact Info -->
+      <div class="header-company-box">
+        <img src="logo.jpg" alt="Phenoix Design Logo" class="company-logo">
+        <div class="company-details">
+          <strong class="company-name">Phenoix Design</strong>
+          <span class="contact-label">Contact:</span>
+          <a href="mailto:phenoixdesign54@gmail.com" class="company-contact">phenoixdesign54@gmail.com</a>
         </div>
       </div>
-      <div class="calc-results">
-        <div class="calc-res-item">
-          <span>Recommended Size</span>
-          <strong id="resKw">3 kW System</strong>
-        </div>
-        <div class="calc-res-item">
-          <span>Est. Annual Savings</span>
-          <strong id="resSavings" style="color:#79d997;">₹32,400 / yr</strong>
-        </div>
-        <div class="calc-res-item">
-          <span>Est. Govt Subsidy</span>
-          <strong id="resSubsidy" style="color:#ffd98a;">₹78,000</strong>
-        </div>
-        <div class="calc-res-item">
-          <span>Net Est. Cost</span>
-          <strong id="resCost">₹1,02,000</strong>
-        </div>
-        <button type="button" class="button primary calc-cta" onclick="applyQuoteToContact()">Apply This Plan To Enquiry Form ➔</button>
+    </header>
+
+    <!-- Main Content: 10 Important Points -->
+    <div class="main-card">
+      <div class="card-title-wrap">
+        <span class="step-badge">PAGE 1</span>
+        <h2>Important Points &amp; Drawing Guidelines</h2>
+        <p class="card-subtitle">Please read the following 10 important specifications before applying for your design drawings:</p>
       </div>
-    </div>
-  </section>
 
-  <section class="process">
-    <div class="process-art"><div class="orb"></div><div class="mini-house"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
-    <div><p class="eyebrow">OUR PROCESS</p><h2>Simple planning.<br><em>Better results.</em></h2>
-      <div class="steps">
-        <div><b>01</b><span><strong>Understand</strong> — We learn your site, needs and goals.</span></div>
-        <div><b>02</b><span><strong>Design</strong> — We turn the idea into a clear, colorful concept.</span></div>
-        <div><b>03</b><span><strong>Refine</strong> — We improve the details with your feedback.</span></div>
-        <div><b>04</b><span><strong>Deliver</strong> — You receive a practical design ready for the next step.</span></div>
+      <div class="points-list">
+        <div class="point-item">
+          <div class="point-num">01</div>
+          <div class="point-text">
+            <strong>Accurate Site Measurements:</strong>
+            <span>Provide accurate rooftop square footage or plot dimensions (length × width in feet or meters) for accurate blueprint generation.</span>
+          </div>
+        </div>
+
+        <div class="point-item">
+          <div class="point-num">02</div>
+          <div class="point-text">
+            <strong>Type 1 Solar Panel Layout:</strong>
+            <span>Includes precise module orientation, tilt angles, inter-row pitch spacing, and shading analysis to maximize annual energy yield.</span>
+          </div>
+        </div>
+
+        <div class="point-item">
+          <div class="point-num">03</div>
+          <div class="point-text">
+            <strong>Type 2 Building Architectural Plans:</strong>
+            <span>Complete 2D floor plans, room zoning, structural elevation profiles, cross-sectional views, and aesthetic modern layouts.</span>
+          </div>
+        </div>
+
+        <div class="point-item">
+          <div class="point-num">04</div>
+          <div class="point-text">
+            <strong>Standard CAD &amp; PDF Deliverables:</strong>
+            <span>All finalized drawings are exported in high-resolution printable PDF and editable AutoCAD (.DWG) formats.</span>
+          </div>
+        </div>
+
+        <div class="point-item">
+          <div class="point-num">05</div>
+          <div class="point-text">
+            <strong>Government &amp; Net-Metering Compliance:</strong>
+            <span>Solar drawings comply with DISCOM grid-tie net-metering standards and building municipal approval guidelines.</span>
+          </div>
+        </div>
+
+        <div class="point-item">
+          <div class="point-num">06</div>
+          <div class="point-text">
+            <strong>Sun-Path &amp; Shadow Analysis:</strong>
+            <span>3D sunlight simulation identifying surrounding parapet walls, overhead tanks, trees, and obstacles for 100% shadow-free placement.</span>
+          </div>
+        </div>
+
+        <div class="point-item">
+          <div class="point-num">07</div>
+          <div class="point-text">
+            <strong>Electrical Single Line Diagram (SLD):</strong>
+            <span>Complete solar schematics showing array strings, combiner boxes, inverter placement, earthing pits, and AC/DC protection.</span>
+          </div>
+        </div>
+
+        <div class="point-item">
+          <div class="point-num">08</div>
+          <div class="point-text">
+            <strong>Fast 24 to 48-Hour Turnaround:</strong>
+            <span>Initial draft blueprints and concepts are shared with you within 24 to 48 hours after application review.</span>
+          </div>
+        </div>
+
+        <div class="point-item">
+          <div class="point-num">09</div>
+          <div class="point-text">
+            <strong>Free Revision Support:</strong>
+            <span>We offer dedicated revision cycles based on your site requirements and architect preferences until complete satisfaction.</span>
+          </div>
+        </div>
+
+        <div class="point-item">
+          <div class="point-num">10</div>
+          <div class="point-text">
+            <strong>Direct Engineering Consultation:</strong>
+            <span>For customized queries, structural checks, or urgent drafting, mail us directly at <b>phenoixdesign54@gmail.com</b>.</span>
+          </div>
+        </div>
       </div>
+
+      <!-- Action Button: Down Arrow & Start -->
+      <div class="action-start-wrap">
+        <div class="down-arrow-indicator">
+          <span>↓</span>
+        </div>
+        <button type="button" class="btn-start" onclick="goToPage2()">
+          Start ➔
+        </button>
+      </div>
+
+      <!-- Handwritten sketch divider: — x — -->
+      <div class="sketch-divider">— x —</div>
     </div>
   </section>
 
-  <section class="projects" id="projects">
-    <div class="center-title"><p class="eyebrow">FEATURED WORK</p><h2>Designed with purpose.</h2><p>Latest live projects from our design team.</p></div>
-    <div class="project-grid" id="projectGrid">
-      <!-- Dynamically loaded from /api/projects with fallback -->
-      <article class="project p-a"><span>01</span><h3>Sunrise Residence</h3><p>Home + rooftop solar concept</p></article>
-      <article class="project p-b"><span>02</span><h3>Green Office</h3><p>Commercial building design</p></article>
-      <article class="project p-c"><span>03</span><h3>Terrace Solar</h3><p>Efficient rooftop layout</p></article>
+
+  <!-- ==============================================
+       PAGE 2: Drawing Type Selection & Apply
+  ============================================== -->
+  <section class="page-container" id="page2">
+    <!-- Page 2 Header -->
+    <header class="page-header header-page2">
+      <div class="header-brand">
+        <h1>PHENOIX DESIGN</h1>
+        <p class="brand-tagline">Drawing Application Portal</p>
+      </div>
+      <div class="header-right-actions">
+        <a href="#page1" class="btn-back">← Back to Page 1</a>
+        <a href="/admin" target="_blank" class="admin-link">Admin 🔐</a>
+      </div>
+    </header>
+
+    <!-- Page 2 Content -->
+    <div class="main-card">
+      <div class="card-title-wrap">
+        <span class="step-badge">PAGE 2</span>
+        <h2>Select Drawing Type &amp; Apply</h2>
+        <p class="card-subtitle">Choose the drawing service required for your project and click Apply:</p>
+      </div>
+
+      <div class="drawings-grid">
+        <!-- TYPE 1: Solar Panel Drawing -->
+        <article class="drawing-card type-solar">
+          <div class="card-badge">TYPE 1</div>
+          <div class="drawing-header">
+            <div class="drawing-icon">☀</div>
+            <div>
+              <h3>Type 1 ➔ Solar Panel Drawing</h3>
+              <p class="drawing-desc">Rooftop Solar Layout, Structure Design &amp; Electrical SLD</p>
+            </div>
+          </div>
+
+          <div class="drawing-preview-box">
+            <div class="blueprint-sketch solar-sketch">
+              <div class="panel-row">
+                <span class="p-cell">PV</span><span class="p-cell">PV</span><span class="p-cell">PV</span><span class="p-cell">PV</span>
+              </div>
+              <div class="panel-row">
+                <span class="p-cell">PV</span><span class="p-cell">PV</span><span class="p-cell">PV</span><span class="p-cell">PV</span>
+              </div>
+              <div class="blueprint-meta">ROOFTOP SOLAR BLUEPRINT • CAD SCALE 1:100</div>
+            </div>
+          </div>
+
+          <ul class="drawing-features">
+            <li>✔ Optimal Module Array &amp; Tilt Layout</li>
+            <li>✔ Shading Analysis &amp; Sun-Path Mapping</li>
+            <li>✔ Electrical Single Line Diagram (SLD)</li>
+            <li>✔ Net-Metering DISCOM Approval Ready</li>
+          </ul>
+
+          <button type="button" class="btn-apply btn-apply-solar" onclick="openApplyModal('Type 1: Solar Panel Drawing')">
+            Apply ➔
+          </button>
+        </article>
+
+        <!-- TYPE 2: Building Design Drawing -->
+        <article class="drawing-card type-building">
+          <div class="card-badge">TYPE 2</div>
+          <div class="drawing-header">
+            <div class="drawing-icon">⌂</div>
+            <div>
+              <h3>Type 2 ➔ Building Design Drawing</h3>
+              <p class="drawing-desc">2D Architectural Floor Plans, Elevations &amp; 3D Visuals</p>
+            </div>
+          </div>
+
+          <div class="drawing-preview-box">
+            <div class="blueprint-sketch building-sketch">
+              <div class="floor-plan-mock">
+                <div class="room r-bed">BEDROOM</div>
+                <div class="room r-hall">LIVING HALL</div>
+                <div class="room r-kit">KITCHEN</div>
+              </div>
+              <div class="blueprint-meta">ARCHITECTURAL FLOOR PLAN • SCALE 1:50</div>
+            </div>
+          </div>
+
+          <ul class="drawing-features">
+            <li>✔ Complete 2D Residential &amp; Commercial Plans</li>
+            <li>✔ Front &amp; Cross-Section Elevation Profiles</li>
+            <li>✔ Structural Grid &amp; Column Placement</li>
+            <li>✔ Modern 3D Elevation Views</li>
+          </ul>
+
+          <button type="button" class="btn-apply btn-apply-building" onclick="openApplyModal('Type 2: Building Design Drawing')">
+            Apply ➔
+          </button>
+        </article>
+      </div>
+
+      <!-- Handwritten sketch divider: — x — -->
+      <div class="sketch-divider">— x —</div>
     </div>
   </section>
 
-  <section class="gallery" id="gallery">
-    <div class="center-title"><p class="eyebrow">DESIGN MOOD</p><h2>Colorful by nature.</h2></div>
-    <div class="gallery-grid">
-      <div class="g g1">SOLAR<br><small>Clean energy</small></div><div class="g g2">FORM<br><small>Smart spaces</small></div>
-      <div class="g g3">LIGHT<br><small>Natural living</small></div><div class="g g4">BUILD<br><small>Strong ideas</small></div>
-    </div>
-  </section>
+  <!-- ==============================================
+       APPLY APPLICATION MODAL
+  ============================================== -->
+  <div id="applyModal" class="modal-overlay">
+    <div class="modal-box">
+      <button type="button" class="btn-close-modal" onclick="closeApplyModal()" aria-label="Close">×</button>
+      
+      <div class="modal-header">
+        <span class="modal-pre">DRAWING APPLICATION</span>
+        <h3 id="modalDrawingTitle">Apply for Type 1 ➔ Solar Panel Drawing</h3>
+        <p>Fill in your details below. Our engineering team will review and reply with your customized design.</p>
+      </div>
 
-  <section class="cta" id="contact">
-    <div>
-      <p class="eyebrow">START YOUR PROJECT</p>
-      <h2>Have an idea?<br><em>Let's design it.</em></h2>
-      <p>Tell us about your solar panel design or building design project and our engineering team will get back to you with custom blueprints and layout plans.</p>
-      <p class="email-line">✉️ <a href="mailto:phenoixdesign54@gmail.com">phenoixdesign54@gmail.com</a></p>
-    </div>
-    <form id="contactForm">
-      <input type="text" id="custName" placeholder="Your name *" required>
-      <input type="email" id="custEmail" placeholder="Email address *" required>
-      <select id="custProjectType" required>
-        <option value="">Project type *</option>
-        <option value="Solar Panel Design">Solar Panel Design</option>
-        <option value="Building Design">Building Design</option>
-        <option value="Solar Panel + Building Design">Solar Panel + Building Design</option>
-        <option value="3D Architectural Renders">3D Architectural Renders</option>
-      </select>
-      <select id="custBudget">
-        <option value="Flexible Budget">Select Budget Scope (Optional)</option>
-        <option value="Under ₹1 Lakh">Under ₹1 Lakh</option>
-        <option value="₹1 Lakh - ₹3 Lakhs">₹1 Lakh - ₹3 Lakhs</option>
-        <option value="₹3 Lakhs - ₹10 Lakhs">₹3 Lakhs - ₹10 Lakhs</option>
-        <option value="₹10 Lakhs+">₹10 Lakhs+</option>
-      </select>
-      <textarea id="custMessage" placeholder="Tell us about your project requirements, location, and dimensions..." rows="4"></textarea>
-      <button class="button primary" type="submit" id="submitBtn">Send Enquiry ↗</button>
-      <small id="formMsg" style="display:block; margin-top:8px; font-weight:600;"></small>
-    </form>
-  </section>
-</main>
+      <form id="drawingApplyForm" onsubmit="submitDrawingApplication(event)">
+        <input type="hidden" id="formProjectType" value="Type 1: Solar Panel Drawing">
 
-<footer>
-  <div class="brand"><img src="logo.jpg" alt="Phenoix Design logo"><span>PHENOIX</span><b>DESIGN</b></div>
-  <p>Solar design • Building design • Creative planning &nbsp;|&nbsp; ✉️ <a href="mailto:phenoixdesign54@gmail.com" class="footer-email">phenoixdesign54@gmail.com</a></p>
-  <div>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#calculator">Calculator</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-    <a href="/admin" target="_blank" style="color:#f5c85b; font-weight:700;">Admin 🔐</a>
+        <div class="form-group">
+          <label>Your Full Name *</label>
+          <input type="text" id="clientName" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="clientEmail" placeholder="e.g. yourname@gmail.com" required>
+        </div>
+
+        <div class="form-group">
+          <label>Site Dimensions / Area (Optional)</label>
+          <input type="text" id="clientDimensions" placeholder="e.g. 1200 sq ft roof, 30x40 ft plot, 5kW requirement">
+        </div>
+
+        <div class="form-group">
+          <label>Specific Instructions / Requirements</label>
+          <textarea id="clientNotes" rows="3" placeholder="Tell us about special requirements, number of floors, parapet height, etc."></textarea>
+        </div>
+
+        <button type="submit" id="btnModalSubmit" class="btn-modal-submit">Submit Application ↗</button>
+        <p id="modalStatusMsg" class="modal-status"></p>
+      </form>
+    </div>
   </div>
-  <small>© 2026 Phenoix Design. All rights reserved. Database Powered Full-Stack Architecture.</small>
-</footer>
 
-<script src="script.js"></script>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p><b>Phenoix Design</b> • Solar &amp; Building Architectural Solutions</p>
+      <p>Official Contact: <a href="mailto:phenoixdesign54@gmail.com">phenoixdesign54@gmail.com</a></p>
+      <p><a href="/admin" target="_blank" style="color:#f5c85b; font-weight:700;">Admin Dashboard 🔐</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
