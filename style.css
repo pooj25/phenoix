@@ -144,85 +144,165 @@ body {
   position: relative;
 }
 
-.card-title-wrap {
-  text-align: center;
+/* =========================================
+   EDITORIAL INTRO & BENTO FEATURE SHOWCASE
+========================================= */
+.editorial-intro {
   margin-bottom: 35px;
-  border-bottom: 2px dashed var(--border);
-  padding-bottom: 25px;
-}
-
-.step-badge {
-  display: inline-block;
-  background: var(--dark-teal);
-  color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 4px 14px;
-  border-radius: 20px;
-  letter-spacing: 1.5px;
-  margin-bottom: 12px;
-}
-
-.card-title-wrap h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(26px, 4vw, 36px);
-  color: var(--navy);
-  font-weight: 800;
-}
-
-.card-subtitle {
-  font-size: 15px;
-  color: var(--text-muted);
-  margin-top: 8px;
-}
-
-/* 10 Important Points */
-.points-list {
-  display: grid;
-  gap: 16px;
-  margin-bottom: 40px;
-}
-
-.point-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  padding: 16px 20px;
+  padding: 24px 28px;
   background: #fbfdfc;
+  border-left: 4px solid var(--orange);
+  border-radius: 14px;
   border: 1px solid var(--border);
   border-left: 4px solid var(--orange);
-  border-radius: 12px;
-  transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
-.point-item:hover {
-  transform: translateX(4px);
-  border-color: var(--teal);
-  border-left-color: var(--teal);
-}
-
-.point-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--orange);
-  background: var(--light-orange);
-  padding: 4px 10px;
-  border-radius: 8px;
-  line-height: 1.2;
-}
-
-.point-text {
-  font-size: 14.5px;
-  color: var(--text-main);
-}
-
-.point-text strong {
+.lead-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.45;
   color: var(--navy);
-  display: block;
-  font-size: 15.5px;
-  margin-bottom: 2px;
+  margin-bottom: 12px;
+  letter-spacing: 0.2px;
+}
+
+.lead-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.lead-sub b {
+  color: var(--navy);
+}
+
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-bottom: 35px;
+}
+
+.bento-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(24, 44, 51, 0.03);
+}
+
+.bento-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--teal);
+  box-shadow: var(--shadow-md);
+}
+
+.b-highlight {
+  background: #fafdfc;
+  border-color: #d4e8e1;
+}
+
+.bento-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+  display: inline-block;
+}
+
+.bento-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.bento-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18.5px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+
+.bento-card p {
+  font-size: 13.8px;
+  color: var(--text-main);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.bento-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bento-badges span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal);
+  background: #edf7f4;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #d4ece5;
+}
+
+/* Metrics Strip */
+.metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  padding: 24px 20px;
+  background: #f0f7f5;
+  border: 1px solid #d6ece5;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.metric-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-col strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: 0.5px;
+}
+
+.metric-col span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 3px;
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .metrics-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
 }
 
 /* Action Area: Down Arrow & Start Button */
