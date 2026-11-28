@@ -532,9 +532,14 @@
             <label>Website Tagline / Mission</label>
             <input type="text" id="setTagline" value="Designing spaces for a brighter tomorrow.">
           </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label>Current Password / PIN (Required to set a new password)</label>
+            <input type="password" id="setCurrentPin" placeholder="Enter your current password">
+          </div>
           <div class="form-group" style="margin-bottom: 22px;">
-            <label>Change Admin Password / PIN</label>
-            <input type="password" id="setNewPin" placeholder="Leave blank to keep current PIN">
+            <label>New Password / PIN</label>
+            <input type="password" id="setNewPin" placeholder="Enter new password (min. 6 characters)">
+            <small style="color:var(--text-muted); font-size:12px;">Stored securely using PBKDF2 cryptographic hashing with salt.</small>
           </div>
           <button type="submit" class="btn-primary">Save Settings 💾</button>
         </form>
@@ -594,7 +599,15 @@
       }
     }
 
-    function logoutAdmin() {
+    async function logoutAdmin() {
+      try {
+        if (adminToken) {
+          await fetch('/api/admin/logout', {
+            method: 'POST',
+            headers: { 'x-admin-token': adminToken }
+          });
+        }
+      } catch (e) {}
       localStorage.removeItem('phenoix_admin_token');
       adminToken = '';
       location.reload();
@@ -815,7 +828,15 @@
       e.preventDefault();
       const contact_email = document.getElementById('setContactEmail').value.trim();
       const tagline = document.getElementById('setTagline').value.trim();
-      const new_pin = document.getElementById('setNewPin').value.trim();
+      const current_pin = document.getElementById('setCurrentPin')?.value.trim() || '';
+      const new_pin = document.getElementById('setNewPin')?.value.trim() || '';
+
+      if (new_pin && new_pin.length < 6) {
+        return alert('New password must be at least 6 characters long.');
+      }
+      if (new_pin && !current_pin) {
+        return alert('Please enter your current password to authorize setting a new password.');
+      }
 
       try {
         const res = await fetch('/api/admin/settings', {
@@ -824,16 +845,22 @@
             'Content-Type': 'application/json',
             'x-admin-token': adminToken
           },
-          body: JSON.stringify({ contact_email, tagline, new_pin })
+          body: JSON.stringify({ contact_email, tagline, current_pin, new_pin })
         });
         const data = await res.json();
         if (data.success) {
-          showToast('Settings saved successfully!');
-          if (new_pin) {
-            adminToken = new_pin;
-            localStorage.setItem('phenoix_admin_token', adminToken);
-            document.getElementById('setNewPin').value = '';
+          showToast(data.message || 'Settings saved successfully!');
+          document.getElementById('setCurrentPin').value = '';
+          document.getElementById('setNewPin').value = '';
+          if (data.requiresRelogin) {
+            localStorage.removeItem('phenoix_admin_token');
+            adminToken = '';
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
           }
+        } else {
+          alert(data.message || 'Failed to save settings.');
         }
       } catch (err) {
         alert('Failed to save settings.');
